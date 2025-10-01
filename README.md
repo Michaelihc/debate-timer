@@ -1,4 +1,4 @@
-# debate-timer
+# Debate Timer
 A GUI timer specifically designed for debates, with indicators on current and next speaker
 
 # Features
