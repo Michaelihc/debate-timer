@@ -1,17 +1,19 @@
 # Debate Timer
-A GUI timer specifically designed for debates, with indicators on current and next speaker
+A GUI timer specifically designed for debates, with indicators on current and next speaker. Built in Unity.
 
 # Features
 - Visualized debate layout
 - Current and next speaker indicator
+- Double timer for free debate
 - Timeline
+- Customizable colors
 
-<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/af5f8c96-05ed-4f23-8579-b260daaa52f9" />
-<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/52109f13-a4c5-4202-a548-d5b7b0a909f2" />
-<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/4d0e2526-377a-4946-b68d-0bd7a070b9e2" />
-<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/69227cf9-c678-4d30-90b2-2a4e3c49c840" />
-<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/abf37224-5a3a-4268-a288-ae7da3b4d2ff" />
-<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/b8d4be9d-84d8-466c-bf64-58e59564939c" />
+<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/bc08d26b-cc9b-4412-81c9-37081f76b472" />
+<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/30eb5090-94d4-4bd2-b3bc-61fc373af34f" />
+<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/350b44da-efd2-4fd3-b854-ac01be6de10e" />
+<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/5ad19ad9-7381-438e-9a71-925d0c3eaf18" />
+<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/3f9daa7a-a802-478e-bf78-f10f70a533fb" />
+<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/95b3ebe1-70d0-4bb3-bafc-09df5730d0c3" />
 
 # ToDo
 1. ~~Double timer for free debate~~
