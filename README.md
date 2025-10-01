@@ -1,0 +1,19 @@
+# debate-timer
+A GUI timer specifically designed for debates, with indicators on current and next speaker
+
+# Features
+Visualized debate layout
+Current and next speaker indicator
+Timeline
+<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/af5f8c96-05ed-4f23-8579-b260daaa52f9" />
+<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/52109f13-a4c5-4202-a548-d5b7b0a909f2" />
+<img width="2880" height="1920" alt="image" src="https://github.com/user-attachments/assets/4d0e2526-377a-4946-b68d-0bd7a070b9e2" />
+![Uploading image.png…]()
+
+
+# Todo
+1. Double timer for free debate
+2. Custom Background Colors
+3. Custom Audio for timers
+4. GUI settings menu (instead of JSON)
+5. Remove unused shaders
