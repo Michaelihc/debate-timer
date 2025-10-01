@@ -78,12 +78,14 @@ public class MenuController : MonoBehaviour
 
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private TMP_Text topic;
-    [SerializeField] private TimerController timerController;
+    [SerializeField] private TimerController simpleTimerController;
     [SerializeField] private GameObject proAnchor;
     [SerializeField] private GameObject conAnchor;
     [SerializeField] private GameObject timelineAnchor;
     [SerializeField] private GameObject speakerPrefab;
     [SerializeField] private GameObject timelineButtonPrefab;
+    [SerializeField] private GameObject defaulTimer;
+    [SerializeField] private GameObject doubleTimer;
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject endScreen;
     [SerializeField] private float totalSpace = 314f;
@@ -108,6 +110,11 @@ public class MenuController : MonoBehaviour
 
     private static bool freePhase = false;
     public static bool FreePhase { get { return freePhase; } set { freePhase = value; } }
+
+    private void Start()
+    {
+        Application.targetFrameRate = 60;
+    }
 
     private void OnEnable()
     {
@@ -185,6 +192,11 @@ public class MenuController : MonoBehaviour
         inputField.text = cachedText;
     }
 
+    public void QuitTimer()
+    {
+        Application.Quit();
+    }
+
     public void Toggle()
     {
         panel.SetActive(!panel.activeSelf);
@@ -212,6 +224,9 @@ public class MenuController : MonoBehaviour
         prepPhase = false;
         freePhase = false;
 
+        defaulTimer.SetActive(true);
+        doubleTimer.SetActive(false);
+
         if (currentEventIndex >= debateData.event_order.Length)
         {
             // End Debate
@@ -221,18 +236,25 @@ public class MenuController : MonoBehaviour
         else if (debateData.event_order[currentEventIndex] == "prep")
         {
             // Prep 
-            timerController.totalTime = debateData.settings.time_prep;
+            simpleTimerController.totalTime = debateData.settings.time_prep;
             topic.text = "Preparation Time";
             currentSpeakerID = int.MinValue;
             prepPhase = true;
+
+            simpleTimerController.ResetTimer();
+            simpleTimerController.StartTimer();
         }
         else if (debateData.event_order[currentEventIndex] == "free")
         {
             // Free Debate
-            timerController.totalTime = debateData.settings.time_free;
             topic.text = "Free Debate Time";
             currentSpeakerID = int.MinValue;
             freePhase = true;
+
+            defaulTimer.SetActive(false);
+            doubleTimer.SetActive(true);
+
+            doubleTimer.GetComponent<InvertTimer>().setTimeSynced(debateData.settings.time_free);
         }
         else
         {
@@ -241,21 +263,24 @@ public class MenuController : MonoBehaviour
             if (currentSpeakerID > 0)
             {
                 // Pro Speaker
-                timerController.totalTime = debateData.pro_side[currentSpeakerID - 1].time;
+                simpleTimerController.totalTime = debateData.pro_side[currentSpeakerID - 1].time;
                 topic.text = $"Speaker {debateData.pro_side[currentSpeakerID - 1].name}'s Turn";
+
+                simpleTimerController.ResetTimer();
+                simpleTimerController.StartTimer();
             }
             else
             {
                 // Con Speaker
-                timerController.totalTime = debateData.con_side[currentSpeakerID * (-1) - 1].time;
+                simpleTimerController.totalTime = debateData.con_side[currentSpeakerID * (-1) - 1].time;
                 topic.text = $"Speaker {debateData.con_side[currentSpeakerID * (-1) - 1].name}'s Turn";
+
+                simpleTimerController.ResetTimer();
+                simpleTimerController.StartTimer();
             }
 
             // let animator handle the rest
         }
-
-        timerController.ResetTimer();
-        timerController.StartTimer();
 
         Debug.Log($"Current Event Index: {currentEventIndex}, Current Speaker ID: {currentSpeakerID}, Next Speaker ID: {nextSpeakerID}");
     }
@@ -270,6 +295,7 @@ public class MenuController : MonoBehaviour
         Debug.Log(debateData);
 
         topic.text = debateData.title;
+        simpleTimerController.warningThreshold = debateData.settings.time_warning;
 
         // Spawn pro side speakers
         int numberOfPro = debateData.pro_side.Length;
@@ -379,5 +405,7 @@ public class MenuController : MonoBehaviour
 
             obj.GetComponentInChildren<TMP_Text>().text = displayText;
         }
+
+        currentEventIndex = -1;
     }
 }

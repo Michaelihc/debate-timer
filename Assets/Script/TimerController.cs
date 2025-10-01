@@ -5,8 +5,8 @@ using UnityEngine.Rendering;
 
 public class TimerController : MonoBehaviour
 {
-    public float totalTime = 180f;
-    public float warningThreshold = 30f;
+    [HideInInspector] public float totalTime = 180f;
+    [HideInInspector] public float warningThreshold = 30f;
 
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private Image timerFill;
@@ -19,8 +19,12 @@ public class TimerController : MonoBehaviour
 
     [SerializeField] private AudioClip end;
     [SerializeField] private AudioClip warning;
-    [SerializeField] private AudioSource audio;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private Animator animator;
+
+    [SerializeField] private GameObject startButton;
+    [SerializeField] private GameObject pauseButton;
+    [SerializeField] private GameObject resumeButton;
 
     private float remainingTime = 0f;
     public float RemainingTime { get { return remainingTime; } }
@@ -38,8 +42,8 @@ public class TimerController : MonoBehaviour
             {
                 timerFill.color = warningFGColor;
                 // Play warning sound
-                audio.clip = warning;
-                audio.Play();
+                audioSource.clip = warning;
+                audioSource.Play();
                 animator.SetTrigger("flash");
             }
             if (remainingTime <= 0f)
@@ -48,10 +52,14 @@ public class TimerController : MonoBehaviour
 
                 remainingTime = 0f;
                 isTimerRunning = false;
-                
+
+                pauseButton.SetActive(false);
+                startButton.SetActive(false);
+                resumeButton.SetActive(false);
+
                 // Play sound
-                audio.clip = end;
-                audio.Play();
+                audioSource.clip = end;
+                audioSource.Play();
             }
         }
         timerText.text = Mathf.Ceil(remainingTime).ToString();
@@ -62,10 +70,21 @@ public class TimerController : MonoBehaviour
     {
         remainingTime = totalTime;
         isTimerRunning = true;
+
+        pauseButton.SetActive(true);
+        startButton.SetActive(false);
+        resumeButton.SetActive(false);
+
+        // Debug.Log("started timer");
     }
     public void StopTimer()
     {
         isTimerRunning = false;
+        pauseButton.SetActive(false);
+        startButton.SetActive(false);
+        resumeButton.SetActive(true);
+
+        // Debug.Log("stoped timer");
     }
     public void ResetTimer()
     {
@@ -74,10 +93,21 @@ public class TimerController : MonoBehaviour
 
         timerFill.color = normalFGColor;
         timerBackground.color = normalBGColor;
+
+        pauseButton.SetActive(false);
+        startButton.SetActive(true);
+        resumeButton.SetActive(false);
+
+        // Debug.Log("reset timer");
     }
     public void ResumeTimer()
     {
         isTimerRunning = true;
+        pauseButton.SetActive(true);
+        startButton.SetActive(false);
+        resumeButton.SetActive(false);
+
+        // Debug.Log("resumed timer");
     }
 
 }
