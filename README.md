@@ -17,8 +17,9 @@ A GUI timer specifically designed for debates, with indicators on current and ne
 
 # ToDo
 1. ~~Double timer for free debate~~
-2. Custom Background Colors
-3. Custom Audio for timers
-4. GUI settings menu (instead of JSON)
-5. Clean UI
-6. Remove unused shaders
+2. Labels for For and Against side
+3. Custom Background Colors
+4. Custom Audio for timers
+5. GUI settings menu (instead of JSON)
+6. Clean UI
+7. Remove unused shaders
