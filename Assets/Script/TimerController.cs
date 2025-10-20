@@ -7,6 +7,7 @@ public class TimerController : MonoBehaviour
 {
     [HideInInspector] public float totalTime = 180f;
     [HideInInspector] public float warningThreshold = 30f;
+    [HideInInspector] public bool displayMinutes = true;
 
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private Image timerFill;
@@ -62,7 +63,17 @@ public class TimerController : MonoBehaviour
                 audioSource.Play();
             }
         }
-        timerText.text = Mathf.Ceil(remainingTime).ToString();
+        if (displayMinutes)
+        {
+            string timeMin = Mathf.FloorToInt(remainingTime / 60f).ToString();
+            string timeSec = Mathf.FloorToInt(remainingTime % 60f).ToString().Length > 1 ? Mathf.FloorToInt(remainingTime % 60f).ToString() : '0' + Mathf.FloorToInt(remainingTime % 60f).ToString();
+            timerText.text = timeMin.ToString() + ':' + timeSec.ToString();
+        }
+        else
+        {
+            timerText.text = Mathf.Floor(remainingTime).ToString();
+        }
+        
         timerFill.fillAmount = remainingTime / totalTime;
     }
 

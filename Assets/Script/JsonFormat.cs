@@ -21,6 +21,7 @@ public class Settings
     public int time_warning;
     public int time_prep;
     public int time_free;
+    public bool display_minutes;
 }
 
 // Participant class for pro_side and con_side

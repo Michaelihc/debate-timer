@@ -12,47 +12,48 @@ public class MenuController : MonoBehaviour
     @"
 {
   ""settings"": {
-    ""pro_colors"": ""#00FF00"",
+    ""pro_colors"": ""#0000FF"",
     ""con_colors"": ""#FF0000"",
     ""time_warning"": 30,
-    ""time_prep"": 500,
-    ""time_free"": 500
+    ""time_prep"": 300,
+    ""time_free"": 500,
+    ""display_minutes"": true
   },
   ""title"": ""New Debate Title"",
   ""pro_side"": [
     {
-      ""name"": ""AAA"",
+      ""name"": ""Team 1 A"",
+      ""time"": 240
+    },
+    {
+      ""name"": ""Team 1 B"",
       ""time"": 180
     },
     {
-      ""name"": ""BBB"",
-      ""time"": 120
-    },
-    {
-      ""name"": ""CCC"",
-      ""time"": 120
-    },
-    {
-      ""name"": ""DDD"",
+      ""name"": ""Team 1 C"",
       ""time"": 180
+    },
+    {
+      ""name"": ""Team 1 D"",
+      ""time"": 300
     }
   ],
   ""con_side"": [
     {
-      ""name"": ""EEE"",
+      ""name"": ""Team 2 A"",
+      ""time"": 240
+    },
+    {
+      ""name"": ""Team 2 B"",
       ""time"": 180
     },
     {
-      ""name"": ""FFF"",
-      ""time"": 120
-    },
-    {
-      ""name"": ""GGG"",
-      ""time"": 120
-    },
-    {
-      ""name"": ""HHH"",
+      ""name"": ""Team 2 C"",
       ""time"": 180
+    },
+    {
+      ""name"": ""Team 2 D"",
+      ""time"": 300
     }
   ],
   ""event_order"": [
@@ -64,9 +65,7 @@ public class MenuController : MonoBehaviour
     3,
     -3,
     4,
-    -4,
-    ""prep"",
-    ""free""
+    -4
   ]
 }
     ";
@@ -296,6 +295,7 @@ public class MenuController : MonoBehaviour
 
         topic.text = debateData.title;
         simpleTimerController.warningThreshold = debateData.settings.time_warning;
+        simpleTimerController.displayMinutes = debateData.settings.display_minutes;
 
         // Spawn pro side speakers
         int numberOfPro = debateData.pro_side.Length;
@@ -380,6 +380,13 @@ public class MenuController : MonoBehaviour
         float startPostion = -300f;
         float distance = (650f - debateData.event_order.Length * buttonWidth) / debateData.event_order.Length;
 
+        // disable all existing buttons
+
+        for (int i = 0; i < timelineButtons.Count; i++)
+        {
+            timelineButtons[i].SetActive(false);
+        }
+
         for (int i = 0; i < debateData.event_order.Length; i++)
         {
             GameObject obj;
@@ -395,6 +402,7 @@ public class MenuController : MonoBehaviour
 
             obj.transform.localPosition = new Vector3(startPostion + i * (buttonWidth + distance), 0, 0);
             obj.GetComponent<TimelineButtonControl>().buttonEventIndex = i + 1;
+            obj.SetActive(true);
 
             string displayText = debateData.event_order[i].ToString();
 

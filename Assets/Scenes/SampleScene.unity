@@ -1963,6 +1963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalTime: 20
   warningThreshold: 5
+  displayMinutes: 1
   timerText: {fileID: 1850784651}
   timerFill: {fileID: 1461387903}
   timerBackground: {fileID: 959317773}
@@ -3084,6 +3085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalTime: 20
   warningThreshold: 5
+  displayMinutes: 1
   timerText: {fileID: 1493154633}
   timerFill: {fileID: 167238194}
   timerBackground: {fileID: 536590495}
@@ -5545,6 +5547,7 @@ MonoBehaviour:
       time_warning: 0
       time_prep: 0
       time_free: 0
+      display_minutes: 0
     title: 
     pro_side: []
     con_side: []
@@ -6979,6 +6982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalTime: 20
   warningThreshold: 5
+  displayMinutes: 1
   timerText: {fileID: 1403276042}
   timerFill: {fileID: 1848277340}
   timerBackground: {fileID: 1276513915}
